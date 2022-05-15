@@ -1,0 +1,33 @@
+{
+  "changelogDate": "20220513152247",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "phone_number",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "unique", "max"],
+      "fieldValidateRulesMax": "9999999999999"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Resident",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "room_number",
+      "otherEntityName": "room",
+      "relationshipName": "room",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"]
+    }
+  ],
+  "service": "no"
+}

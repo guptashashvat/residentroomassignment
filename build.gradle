@@ -226,7 +226,6 @@ dependencies {
     implementation "org.apache.commons:commons-lang3"
     implementation "javax.transaction:javax.transaction-api"
     implementation "org.ehcache:ehcache"
-    implementation "org.hibernate:hibernate-jcache"
     implementation "org.hibernate:hibernate-entitymanager"
     implementation "org.hibernate.validator:hibernate-validator"
     implementation "org.liquibase:liquibase-core"

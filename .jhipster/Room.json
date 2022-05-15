@@ -1,0 +1,24 @@
+{
+  "changelogDate": "20220513151659",
+  "fields": [
+    {
+      "fieldName": "room_number",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "max"],
+      "fieldValidateRulesMax": "10000"
+    }
+  ],
+  "name": "Room",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "facility_name",
+      "otherEntityName": "facility",
+      "relationshipName": "facility",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": ["required"]
+    }
+  ],
+  "service": "no"
+}

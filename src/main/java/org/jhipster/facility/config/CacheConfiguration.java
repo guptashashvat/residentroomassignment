@@ -3,10 +3,8 @@ package org.jhipster.facility.config;
 import java.time.Duration;
 import org.ehcache.config.builders.*;
 import org.ehcache.jsr107.Eh107Configuration;
-import org.hibernate.cache.jcache.ConfigSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.info.GitProperties;
 import org.springframework.cache.annotation.EnableCaching;
@@ -36,18 +34,10 @@ public class CacheConfiguration {
     }
 
     @Bean
-    public HibernatePropertiesCustomizer hibernatePropertiesCustomizer(javax.cache.CacheManager cacheManager) {
-        return hibernateProperties -> hibernateProperties.put(ConfigSettings.CACHE_MANAGER, cacheManager);
-    }
-
-    @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer() {
         return cm -> {
             createCache(cm, org.jhipster.facility.repository.UserRepository.USERS_BY_LOGIN_CACHE);
             createCache(cm, org.jhipster.facility.repository.UserRepository.USERS_BY_EMAIL_CACHE);
-            createCache(cm, org.jhipster.facility.domain.User.class.getName());
-            createCache(cm, org.jhipster.facility.domain.Authority.class.getName());
-            createCache(cm, org.jhipster.facility.domain.User.class.getName() + ".authorities");
             // jhipster-needle-ehcache-add-entry
         };
     }

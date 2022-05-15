@@ -1,0 +1,16 @@
+{
+  "changelogDate": "20220513151246",
+  "fields": [
+    {
+      "fieldName": "facility_name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    }
+  ],
+  "name": "Facility",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

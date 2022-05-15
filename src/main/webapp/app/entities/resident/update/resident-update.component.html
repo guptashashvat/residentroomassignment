@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-resident-heading" data-cy="ResidentCreateUpdateHeading">Create or edit a Resident</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_phone_number">Phone Number</label>
+          <input
+            type="number"
+            class="form-control"
+            name="phone_number"
+            id="field_phone_number"
+            data-cy="phone_number"
+            formControlName="phone_number"
+          />
+          <div
+            *ngIf="editForm.get('phone_number')!.invalid && (editForm.get('phone_number')!.dirty || editForm.get('phone_number')!.touched)"
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('phone_number')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('phone_number')?.errors?.max">
+              This field cannot be more than 9999999999999.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('phone_number')?.errors?.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_room">Room</label>
+          <select class="form-control" id="field_room" data-cy="room" name="room" formControlName="room">
+            <option *ngIf="!editForm.get('room')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="roomOption.id === editForm.get('room')!.value?.id ? editForm.get('room')!.value : roomOption"
+              *ngFor="let roomOption of roomsSharedCollection; trackBy: trackRoomById"
+            >
+              {{ roomOption.room_number }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['room'])!.invalid && (editForm.get(['room'])!.dirty || editForm.get(['room'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['room'])?.errors?.required"> This field is required. </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
